@@ -17,7 +17,7 @@ no matter what the original distribution it was.
 # Sidebar for inputs
 with st.sidebar:
     st.header("Settings")
-    dist_type = st.selectbox("1. Pick a population, 
+    dist_type = st.selectbox("1. Pick a population", 
                              ["Exponential (Skewed)", "Uniform (Flat)", "Bimodal (Two Humps)"])
     
     sample_size = st.slider("2. Sample Size (n)", 1, 100, 30, 
