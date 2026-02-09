@@ -6,19 +6,19 @@ import seaborn as sns
 
 st.set_page_config(page_title="CLT Visualizer", layout="wide")
 
-st.title("🎲 The Central Limit Theorem (CLT) Chaos Machine")
+st.title("The Central Limit Theorem (CLT) Machine")
 
 st.markdown("""
-The **Central Limit Theorem (CLT)** is the 'magic' of statistics. It states that as long as you have a 
-large enough sample size, the distribution of the **sample means** will be normally distributed (a Bell Curve), 
-no matter what the original distribution of the data looks like.
+The **Central Limit Theorem (CLT)** means that as long as you have a 
+large enough sample size, the distribution of the **sample means** will be normally distributed, 
+no matter what the original distribution it was.
 """)
 
 # Sidebar for inputs
 with st.sidebar:
-    st.header("Configuration")
-    dist_type = st.selectbox("1. Pick a 'Crazy' Population", 
-                             ["Exponential (Highly Skewed)", "Uniform (Flat)", "Bimodal (Two Humps)"])
+    st.header("Settings")
+    dist_type = st.selectbox("1. Pick a population, 
+                             ["Exponential (Skewed)", "Uniform (Flat)", "Bimodal (Two Humps)"])
     
     sample_size = st.slider("2. Sample Size (n)", 1, 100, 30, 
                             help="How many data points we average together to get ONE mean.")
@@ -44,7 +44,6 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.subheader("The Parent Population")
-    st.info("Notice this distribution is NOT a bell curve.")
     fig1, ax1 = plt.subplots()
     sns.histplot(pop, kde=True, color="orange", ax=ax1)
     ax1.set_title("Original Data Distribution")
@@ -52,15 +51,8 @@ with col1:
 
 with col2:
     st.subheader("The Sampling Distribution")
-    st.success(f"Behold! The distribution of {num_simulations} means is a Bell Curve.")
     fig2, ax2 = plt.subplots()
     sns.histplot(means, kde=True, color="teal", ax=ax2)
     ax2.set_title(f"Distribution of Sample Means (n={sample_size})")
     st.pyplot(fig2)
 
-st.write("""
-### How to use this:
-1. Try setting the **Sample Size (n)** to 1. You'll see the second chart looks exactly like the first.
-2. Slowly increase **n**. Watch how the second chart 'collapses' into a thin, symmetrical bell curve.
-3. This is why we can use Normal Distribution math for almost any data, as long as our sample is large enough!
-""")
